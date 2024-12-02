@@ -7,13 +7,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.example.bondarenkolab.entity.Employee;
+import org.example.bondarenkolab.dto.PaymentAccountDto;
 import org.example.bondarenkolab.entity.PaymentAccount;
-import org.example.bondarenkolab.service.EmployeeService;
 import org.example.bondarenkolab.service.PaymentAccountService;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,8 +28,8 @@ public class PaymentAccountController {
     })
 
     @PostMapping
-    public PaymentAccount createPaymentAccount(@RequestParam("userId") Long userId,
-                                               @RequestParam("bankId") Long bankId) {
+    public PaymentAccountDto createPaymentAccount(@RequestParam("userId") Long userId,
+                                                  @RequestParam("bankId") Long bankId) {
         return paymentAccountService.createPaymentAccount(userId, bankId);
     }
 
@@ -59,7 +56,7 @@ public class PaymentAccountController {
     })
 
     @PatchMapping("/{id}")
-    public PaymentAccount updatePaymentAccount(@PathVariable("id") Long id, @RequestParam("amount") Integer amount) {
+    public PaymentAccountDto updatePaymentAccount(@PathVariable("id") Long id, @RequestParam("amount") Integer amount) {
         return paymentAccountService.updatePaymentAccount(id, amount);
     }
 

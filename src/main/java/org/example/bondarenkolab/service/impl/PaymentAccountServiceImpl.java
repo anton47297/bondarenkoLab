@@ -1,6 +1,7 @@
 package org.example.bondarenkolab.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.example.bondarenkolab.dto.PaymentAccountDto;
 import org.example.bondarenkolab.entity.Bank;
 import org.example.bondarenkolab.entity.PaymentAccount;
 import org.example.bondarenkolab.entity.User;
@@ -10,6 +11,7 @@ import org.example.bondarenkolab.repository.UserRepository;
 import org.example.bondarenkolab.service.BankService;
 import org.example.bondarenkolab.service.PaymentAccountService;
 import org.example.bondarenkolab.service.UserService;
+import org.example.bondarenkolab.service.mapper.PaymentAccountMapper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,6 +23,7 @@ public class PaymentAccountServiceImpl implements PaymentAccountService {
     private final UserService userServices;
     private final BankService bankService;
     private final UserRepository userRepository;
+    private final PaymentAccountMapper paymentAccountMapper;
 
     public User addBankToUser(Long userId, Long bankId) {
         User user = userServices.getUserById(userId);
@@ -37,7 +40,7 @@ public class PaymentAccountServiceImpl implements PaymentAccountService {
     }
 
     @Override
-    public PaymentAccount createPaymentAccount(Long userId, Long bankId) {
+    public PaymentAccountDto createPaymentAccount(Long userId, Long bankId) {
         PaymentAccount paymentAccount = new PaymentAccount();
         paymentAccount.setUser(userServices.getUserById(userId));
         Bank bank = bankService.getBankById(bankId);
@@ -48,7 +51,7 @@ public class PaymentAccountServiceImpl implements PaymentAccountService {
         bankRepository.save(bank);
         paymentAccountRepository.save(paymentAccount);
         addPaymentAccountToUser(userId, paymentAccount.getId());
-        return paymentAccount;
+        return paymentAccountMapper.toDto(paymentAccount);
     }
 
     @Override
@@ -58,11 +61,16 @@ public class PaymentAccountServiceImpl implements PaymentAccountService {
     }
 
     @Override
-    public PaymentAccount updatePaymentAccount(Long id, Integer amount) {
+    public PaymentAccountDto getPaymentAccountByIdDto(Long id) {
+        return paymentAccountMapper.toDto(getPaymentAccountById(id));
+    }
+
+    @Override
+    public PaymentAccountDto updatePaymentAccount(Long id, Integer amount) {
         PaymentAccount paymentAccount = getPaymentAccountById(id);
         paymentAccount.setAmount(amount);
         paymentAccountRepository.save(paymentAccount);
-        return paymentAccount;
+        return paymentAccountMapper.toDto(paymentAccount);
     }
 
     @Override

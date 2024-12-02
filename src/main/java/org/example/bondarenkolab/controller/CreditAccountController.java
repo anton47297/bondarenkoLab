@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.example.bondarenkolab.dto.CreditAccountDto;
 import org.example.bondarenkolab.entity.CreditAccount;
 import org.example.bondarenkolab.service.CreditAccountService;
 import org.springframework.web.bind.annotation.*;
@@ -29,13 +30,13 @@ public class CreditAccountController {
     })
 
     @PostMapping
-    public CreditAccount createCreditAccount(@RequestParam("userId") Long userId, @RequestParam("bankId") Long bankId,
-                                             @RequestParam("startDate") LocalDate startDate,
-                                             @RequestParam("endDate") LocalDate endDate,
-                                             @RequestParam("loanAmount") Integer loanAmount,
-                                             @RequestParam("interestRate") Float interestRate,
-                                             @RequestParam("issuingEmployeeId") Long issuingEmployeeId,
-                                             @RequestParam("paymentAccountId") Long paymentAccountId) {
+    public CreditAccountDto createCreditAccount(@RequestParam("userId") Long userId, @RequestParam("bankId") Long bankId,
+                                                @RequestParam("startDate") LocalDate startDate,
+                                                @RequestParam("endDate") LocalDate endDate,
+                                                @RequestParam("loanAmount") Integer loanAmount,
+                                                @RequestParam("interestRate") Float interestRate,
+                                                @RequestParam("issuingEmployeeId") Long issuingEmployeeId,
+                                                @RequestParam("paymentAccountId") Long paymentAccountId) {
         return creditAccountService.createCreditAccount(userId, bankId, startDate, endDate,
                 loanAmount, interestRate, issuingEmployeeId, paymentAccountId);
     }
@@ -63,8 +64,8 @@ public class CreditAccountController {
     })
 
     @PatchMapping("/{id}")
-    public CreditAccount updateCreditAccount(@PathVariable("id") Long id,
-                                             @RequestParam("paymentAccountId") Long paymentAccountId) {
+    public CreditAccountDto updateCreditAccount(@PathVariable("id") Long id,
+                                                @RequestParam("paymentAccountId") Long paymentAccountId) {
         return creditAccountService.updateCreditAccount(id, paymentAccountId);
     }
 
