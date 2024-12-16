@@ -11,6 +11,8 @@ import org.example.bondarenkolab.entity.Bank;
 import org.example.bondarenkolab.service.BankService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/bank")
@@ -72,4 +74,15 @@ public class BankController {
         return null;
     }
 
+    // получение всех банков
+    @Operation(summary = "Получение всех банков")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Список всех банков",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Bank.class))})
+    })
+    @GetMapping
+    public List<Bank> getAllBanks() {
+        return bankService.getAllBanks();
+    }
 }

@@ -11,6 +11,8 @@ import org.example.bondarenkolab.entity.BankAtm;
 import org.example.bondarenkolab.service.BankAtmService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -84,5 +86,17 @@ public class BankAtmController {
     public BankAtm deleteBankAtm(@Parameter(description = "ID банкомата") @PathVariable("id") Long id) {
         bankAtmService.deleteBankAtm(id);
         return null;
+    }
+
+    // получение всех банкоматов
+    @Operation(summary = "Получение всех банкоматов")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Список всех банкоматов",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = BankAtm.class))})
+    })
+    @GetMapping
+    public List<BankAtm> getAllBankAtms() {
+        return bankAtmService.getAllBankAtms();
     }
 }

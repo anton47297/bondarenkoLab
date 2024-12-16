@@ -12,6 +12,8 @@ import org.example.bondarenkolab.entity.PaymentAccount;
 import org.example.bondarenkolab.service.PaymentAccountService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/payment_account")
@@ -73,5 +75,17 @@ public class PaymentAccountController {
                                                @PathVariable("id") Long id) {
         paymentAccountService.deletePaymentAccount(id);
         return null;
+    }
+
+    // получение всех платежных счетов
+    @Operation(summary = "Получение всех платежных счетов")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Список платежных счетов получен",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = PaymentAccount.class))})
+    })
+    @GetMapping
+    public List<PaymentAccount> getAllPaymentAccounts() {
+        return paymentAccountService.getAllPaymentAccounts();
     }
 }

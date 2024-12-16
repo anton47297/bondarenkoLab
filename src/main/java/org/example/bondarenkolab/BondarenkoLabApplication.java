@@ -9,5 +9,4 @@ public class BondarenkoLabApplication {
     public static void main(String[] args) {
         SpringApplication.run(BondarenkoLabApplication.class, args);
     }
-
 }

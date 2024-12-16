@@ -11,6 +11,8 @@ import org.example.bondarenkolab.entity.BankOffice;
 import org.example.bondarenkolab.service.BankOfficeService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/bank_office")
@@ -86,4 +88,15 @@ public class BankOfficeController {
         return null;
     }
 
+    // получение всех банковских офисов
+    @Operation(summary = "Получение всех банковских офисов")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Список всех банковских офисов",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = BankOffice.class))})
+    })
+    @GetMapping
+    public List<BankOffice> getAllBankOffices() {
+        return bankOfficeService.getAllBankOffices();
+    }
 }

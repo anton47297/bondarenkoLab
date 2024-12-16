@@ -6,6 +6,8 @@ import org.example.bondarenkolab.repository.BankRepository;
 import org.example.bondarenkolab.service.BankService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BankServiceImpl implements BankService {
@@ -43,5 +45,9 @@ public class BankServiceImpl implements BankService {
     @Override
     public void deleteBank(Long id) {
         bankRepository.deleteById(id);
+    }
+
+    public List<Bank> getAllBanks() {
+        return bankRepository.findAll();
     }
 }

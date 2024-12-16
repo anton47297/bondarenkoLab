@@ -2,6 +2,8 @@ package org.example.bondarenkolab.service;
 
 import org.example.bondarenkolab.entity.BankAtm;
 
+import java.util.List;
+
 public interface BankAtmService {
 
     BankAtm createBankAtm(String name, String address, Boolean status, Long bankId,
@@ -15,4 +17,6 @@ public interface BankAtmService {
                           Boolean isDepositingMoney, Integer servicingCost);
 
     void deleteBankAtm(Long id);
+
+    List<BankAtm> getAllBankAtms();
 }

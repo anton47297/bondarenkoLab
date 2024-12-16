@@ -10,6 +10,8 @@ import org.example.bondarenkolab.service.BankOfficeService;
 import org.example.bondarenkolab.service.BankService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -73,5 +75,9 @@ public class BankOfficeServiceImpl implements BankOfficeService {
         bank.setCountOffices(bank.getCountOffices() - 1);
         bankRepository.save(bank);
         bankOfficeRepository.deleteById(id);
+    }
+
+    public List<BankOffice> getAllBankOffices() {
+        return bankOfficeRepository.findAll(); // Используем Spring Data JPA
     }
 }

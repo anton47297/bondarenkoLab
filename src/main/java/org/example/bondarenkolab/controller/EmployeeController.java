@@ -12,6 +12,7 @@ import org.example.bondarenkolab.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -86,5 +87,17 @@ public class EmployeeController {
     public Employee deleteEmployee(@Parameter(description = "ID сотрудника") @PathVariable("id") Long id) {
         employeeService.deleteEmployee(id);
         return null;
+    }
+
+    // получение всех сотрудников
+    @Operation(summary = "Получение всех сотрудников")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Список сотрудников получен",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Employee.class))})
+    })
+    @GetMapping
+    public List<Employee> getAllEmployees() {
+        return employeeService.getAllEmployees();
     }
 }

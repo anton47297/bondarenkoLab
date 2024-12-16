@@ -12,6 +12,7 @@ import org.example.bondarenkolab.service.mapper.CreditAccountMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -81,5 +82,10 @@ public class CreditAccountServiceImpl implements CreditAccountService {
     @Override
     public void deleteCreditAccount(Long id) {
         creditAccountRepository.deleteById(id);
+    }
+
+    // Метод для получения всех кредитных счетов
+    public List<CreditAccount> getAllCreditAccounts() {
+        return creditAccountRepository.findAll();
     }
 }

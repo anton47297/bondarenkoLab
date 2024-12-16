@@ -12,6 +12,7 @@ import org.example.bondarenkolab.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -75,4 +76,17 @@ public class UserController {
         userService.deleteUser(id);
         return null;
     }
+
+    // получение всех пользователей
+    @Operation(summary = "Получение всех пользователей")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Список пользователей получен",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = User.class))})
+    })
+    @GetMapping
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
 }

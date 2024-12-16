@@ -2,6 +2,8 @@ package org.example.bondarenkolab.service;
 
 import org.example.bondarenkolab.entity.BankOffice;
 
+import java.util.List;
+
 public interface BankOfficeService {
     BankOffice createBankOffice(Long bankId, String name, String address, Boolean status,
                                 Boolean canPlaceAtm, Boolean canIssueLoan, Boolean isIssuingMoney,
@@ -14,4 +16,6 @@ public interface BankOfficeService {
                                 Boolean isDepositingMoney, Integer rentalCost);
 
     void deleteBankOffice(Long id);
+
+    List<BankOffice> getAllBankOffices();
 }

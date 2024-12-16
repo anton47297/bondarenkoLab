@@ -14,6 +14,8 @@ import org.example.bondarenkolab.service.UserService;
 import org.example.bondarenkolab.service.mapper.PaymentAccountMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PaymentAccountServiceImpl implements PaymentAccountService {
@@ -80,5 +82,11 @@ public class PaymentAccountServiceImpl implements PaymentAccountService {
         bank.setCountClients(bank.getCountClients() - 1);
         bankRepository.save(bank);
         paymentAccountRepository.deleteById(id);
+    }
+
+
+    // Метод для получения всех платежных счетов
+    public List<PaymentAccount> getAllPaymentAccounts() {
+        return paymentAccountRepository.findAll();
     }
 }

@@ -7,6 +7,7 @@ import org.example.bondarenkolab.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -44,5 +45,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+
+    // Метод для получения всех пользователей
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }

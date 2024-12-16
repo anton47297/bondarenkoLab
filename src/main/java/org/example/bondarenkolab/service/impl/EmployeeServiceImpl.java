@@ -12,6 +12,7 @@ import org.example.bondarenkolab.service.EmployeeService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -69,5 +70,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         bank.setCountEmployees(bank.getCountEmployees() - 1);
         bankRepository.save(bank);
         employeeRepository.deleteById(id);
+    }
+
+    // Метод для получения всех сотрудников
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
     }
 }

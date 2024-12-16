@@ -10,6 +10,8 @@ import org.example.bondarenkolab.service.BankService;
 import org.example.bondarenkolab.service.EmployeeService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BankAtmServiceImpl implements BankAtmService {
@@ -74,5 +76,9 @@ public class BankAtmServiceImpl implements BankAtmService {
         bank.setCountAtms(bank.getCountAtms() - 1);
         bankRepository.save(bank);
         bankAtmRepository.deleteById(id);
+    }
+
+    public List<BankAtm> getAllBankAtms() {
+        return bankAtmRepository.findAll();
     }
 }

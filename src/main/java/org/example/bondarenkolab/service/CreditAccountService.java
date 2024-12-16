@@ -4,6 +4,7 @@ import org.example.bondarenkolab.dto.CreditAccountDto;
 import org.example.bondarenkolab.entity.CreditAccount;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface CreditAccountService {
 
@@ -18,4 +19,6 @@ public interface CreditAccountService {
     CreditAccountDto updateCreditAccount(Long id, Long paymentAccountId);
 
     void deleteCreditAccount(Long id);
+
+    List<CreditAccount> getAllCreditAccounts();
 }

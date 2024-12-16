@@ -13,6 +13,7 @@ import org.example.bondarenkolab.service.CreditAccountService;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -82,5 +83,17 @@ public class CreditAccountController {
                                              @PathVariable("id") Long id) {
         creditAccountService.deleteCreditAccount(id);
         return null;
+    }
+
+    // получение всех кредитных счетов
+    @Operation(summary = "Получение всех кредитных счетов")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Список всех кредитных счетов",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CreditAccount.class))})
+    })
+    @GetMapping
+    public List<CreditAccount> getAllCreditAccounts() {
+        return creditAccountService.getAllCreditAccounts();
     }
 }
